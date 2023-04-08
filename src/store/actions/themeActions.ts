@@ -1,4 +1,4 @@
-import { Theme } from '../../../types';
+import { Theme } from '../../types';
 import { Dispatch } from 'redux';
 
 export const TOGGLE_THEME = 'TOGGLE_THEME';
