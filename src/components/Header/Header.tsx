@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 import { logout } from '../../store/actions/authActions';
 import { toggleTheme } from '../../store/actions/themeActions';
+import styled from 'styled-components/native/dist';
 // import SearchBar from '../SearchBar/SearchBar';
-import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
   display: flex;
