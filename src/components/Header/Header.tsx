@@ -4,6 +4,7 @@ import { RootState } from '../../store/rootReducer';
 import { logout } from '../../store/actions/authActions';
 import { toggleTheme } from '../../store/actions/themeActions';
 import styled from 'styled-components';
+import { lightTheme } from '../../styles/themes';
 // import SearchBar from '../SearchBar/SearchBar';
 
 const HeaderContainer = styled.header`
@@ -48,10 +49,12 @@ const Nav = styled.nav`
 
 const Header = () => {
   const dispatch = useDispatch();
+
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
   const theme = useSelector((state: RootState) => state.theme.theme);
+  
   const toggleHandler = () => dispatch(toggleTheme());
 
   const handleLogout = () => {
@@ -59,14 +62,14 @@ const Header = () => {
   };
 
   return (
-    <HeaderContainer>
+    <HeaderContainer theme={theme}>
       <Logo>BirdWatcher</Logo>
       {/* <SearchBar /> */}
-      <Nav>
+      <Nav theme={theme}>
         <ul>
           <li>
             <button onClick={toggleHandler}>
-              {theme === 'light' ? 'Dark' : 'Light'} Theme
+              {theme === lightTheme ? 'Dark' : 'Light'} Theme
             </button>
           </li>
           {isAuthenticated ? (

@@ -6,7 +6,15 @@ export interface Bird {
   imageUrl: string;
   description: string;
 }
-export type Theme = 'light' | 'dark';
+export type Theme = {
+  bodyBackground: string;
+  headerBackground: string;
+  headerText: string;
+  cardBackground: string;
+  cardText: string;
+  buttonText: string;
+  buttonBackground: string;
+};
 
 // Define types for bird-related actions
 export const FETCH_BIRDS_REQUEST = 'FETCH_BIRDS_REQUEST';
