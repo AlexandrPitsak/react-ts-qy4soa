@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/rootReducer";
 // import { logout } from '../../store/actions/authActions';
@@ -11,15 +11,10 @@ import SearchBar from "../SearchBar";
 import styled from "styled-components";
 import { Theme } from "../../types";
 
-
-const HeaderContainer = styled.header`
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-background-color: #fff;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-z-index: 9999;
+const HeaderContainer = styled.header<{ hasShadow: boolean }>`
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,6 +22,12 @@ z-index: 9999;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.headerBackground};
   color: ${(props: { theme: Theme }) => props.theme.text};
+  transition: box-shadow 0.2s ease-in-out;
+  ${({ hasShadow }) =>
+    hasShadow &&
+    `
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    `}
 `;
 
 const Logo = styled.div`
@@ -46,9 +47,9 @@ const Nav = styled.nav`
   }
 
   button {
-      font-size: 1.1rem;
+    font-size: 1rem;
 
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: bold;
     color: ${(props: { theme: { buttonText: any } }) => props.theme.buttonText};
@@ -70,18 +71,47 @@ const Header = () => {
   //   (state: RootState) => state.auth.isAuthenticated
   // );
   const theme = useSelector((state: RootState) => state.theme.theme);
+  // const toggleHandler = () => dispatch(toggleTheme());
+
+    // const handleLogout = () => {
+    //   dispatch(logout());
+    // };
 
   const toggleHandler = () => {
     dispatch(toggleTheme() as unknown as ThemeActionTypes);
   };
-  // const toggleHandler = () => dispatch(toggleTheme());
+  /*
+  This code sets up an event listener on the window object to listen for scroll events.
+  When the user scrolls down the page, it checks the current vertical scroll position
+   using window.pageYOffset.
+  If the position is greater than 0, it sets the hasShadow state variable to true,
+  indicating that the Header should display a shadow. If the position is 0,
+  it sets the hasShadow state variable to false.
+   */
+  const [hasShadow, setHasShadow] = useState(false);
 
-  // const handleLogout = () => {
-  //   dispatch(logout());
-  // };
+  const handleScroll = () => {
+    if (window.pageYOffset > 0) {
+      setHasShadow(true);
+    } else {
+      setHasShadow(false);
+    }
+  };
+  /*
+  The useEffect hook is used to add and remove the event listener.
+  It is only called once when the component is mounted, thanks to the empty
+  dependency array [] passed as the second argument. When the component is unmounted,
+  the returned cleanup function removes the event listener to avoid memory leaks.
+  */
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <HeaderContainer theme={theme}>
+    <HeaderContainer theme={theme} hasShadow={hasShadow}>
       <Logo>BirdWatcher</Logo>
 
       <Nav theme={theme}>

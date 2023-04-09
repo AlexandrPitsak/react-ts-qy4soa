@@ -14,9 +14,6 @@ const SearchInput = styled.input`
 `;
 
 const SearchButton = styled.button`
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.5rem;
   background-color: ${(props: { theme: Theme }) => props.theme.buttonBackground};
   color: ${(props: { theme: Theme }) => props.theme.buttonText};
   font-weight: bold;
