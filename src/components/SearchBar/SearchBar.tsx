@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components/';
 import { lightTheme } from '../../styles/themes';
-import { RootState } from '../../types';
+import { RootState, Theme } from '../../types';
+import styled from 'styled-components';
 
 const SearchInput = styled.input`
   padding: 0.5rem;
@@ -17,8 +17,8 @@ const SearchButton = styled.button`
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: ${(props) => props.theme.buttonBackground};
-  color: ${(props) => props.theme.buttonText};
+  background-color: ${(props: { theme: Theme }) => props.theme.buttonBackground};
+  color: ${(props: { theme: Theme }) => props.theme.buttonText};
   font-weight: bold;
   cursor: pointer;
 `;
@@ -30,10 +30,11 @@ const SearchContainer = styled.div`
 
 interface Props {
   onSearch: (query: string) => void;
+  theme: Theme;
 }
 
-const SearchBar: React.FC<Props> = ({ onSearch }) => {
-  const theme = useSelector((state: RootState) => state.theme.theme);
+const SearchBar: React.FC<Props> = ({ onSearch, theme }) => {
+  theme = useSelector((state: RootState) => state.theme.theme);
 
   const [query, setQuery] = React.useState('');
 
