@@ -50,7 +50,7 @@ const SearchBar: React.FC<Props> = ({ onSearch }) => {
           type="text"
           placeholder="Search for birds"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(event) => setQuery(event.target.value)}
         />
         <SearchButton theme={theme} type="submit">
           Search

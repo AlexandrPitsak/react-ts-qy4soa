@@ -13,13 +13,20 @@ import { Theme } from "../../types";
 
 
 const HeaderContainer = styled.header`
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+background-color: #fff;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+z-index: 9999;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.headerBackground};
-  color: ${(props: { theme: Theme }) => props.theme.headerText};
+  color: ${(props: { theme: Theme }) => props.theme.text};
 `;
 
 const Logo = styled.div`
@@ -39,7 +46,9 @@ const Nav = styled.nav`
   }
 
   button {
-    padding: 0.5rem 1rem;
+      font-size: 1.1rem;
+
+    padding: 0.5rem 2rem;
     border-radius: 0.5rem;
     font-weight: bold;
     color: ${(props: { theme: { buttonText: any } }) => props.theme.buttonText};

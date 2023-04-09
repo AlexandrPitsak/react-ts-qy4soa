@@ -9,7 +9,7 @@ export interface Bird {
 export type Theme = {
   bodyBackground: string;
   headerBackground: string;
-  headerText: string;
+  text: string;
   cardBackground: string;
   cardText: string;
   buttonText: string;
