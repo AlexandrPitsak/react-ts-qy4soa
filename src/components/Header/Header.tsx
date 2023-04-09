@@ -1,20 +1,25 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store/rootReducer';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/rootReducer";
 // import { logout } from '../../store/actions/authActions';
-import { ThemeActionTypes, toggleTheme } from '../../store/actions/themeActions';
-import { lightTheme } from '../../styles/themes';
-import SearchBar from '../SearchBar';
-import styled from 'styled-components';
-import { Theme } from '../../types';
+import {
+  ThemeActionTypes,
+  toggleTheme,
+} from "../../store/actions/themeActions";
+import { lightTheme } from "../../styles/themes";
+import SearchBar from "../SearchBar";
+import styled from "styled-components";
+import { Theme } from "../../types";
+
 
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: ${(props: { theme: Theme }) => props.theme.headerBackground};
-  color: ${(props: { theme: Theme}) => props.theme.headerText};
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.headerBackground};
+  color: ${(props: { theme: Theme }) => props.theme.headerText};
 `;
 
 const Logo = styled.div`
@@ -37,8 +42,9 @@ const Nav = styled.nav`
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: bold;
-    color: ${(props: { theme: { buttonText: any; }; }) => props.theme.buttonText};
-    background-color: ${(props: { theme: { buttonBackground: any; }; }) => props.theme.buttonBackground};
+    color: ${(props: { theme: { buttonText: any } }) => props.theme.buttonText};
+    background-color: ${(props: { theme: { buttonBackground: any } }) =>
+      props.theme.buttonBackground};
     border: none;
     cursor: pointer;
 
@@ -68,14 +74,19 @@ const Header = () => {
   return (
     <HeaderContainer theme={theme}>
       <Logo>BirdWatcher</Logo>
-      <SearchBar theme={theme} onSearch={function (query: string): void {
-        throw new Error('Function not implemented.');
-      } }/>
+
       <Nav theme={theme}>
         <ul>
           <li>
+            <SearchBar
+              onSearch={function (query: string): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
+          </li>
+          <li>
             <button onClick={toggleHandler}>
-              {theme === lightTheme ? 'Dark' : 'Light'} Theme
+              {theme === lightTheme ? "Dark" : "Light"} Theme
             </button>
           </li>
           {/* {isAuthenticated ? (
@@ -87,9 +98,9 @@ const Header = () => {
               <button>Login</button>
             </li>
           )} */}
-           <li>
-              <button>Login</button>
-            </li>
+          <li>
+            <button>Login</button>
+          </li>
         </ul>
       </Nav>
     </HeaderContainer>

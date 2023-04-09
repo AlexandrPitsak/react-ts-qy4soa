@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { lightTheme } from '../../styles/themes';
 import { RootState, Theme } from '../../types';
@@ -30,13 +30,12 @@ const SearchContainer = styled.div`
 
 interface Props {
   onSearch: (query: string) => void;
-  theme: Theme;
 }
 
-const SearchBar: React.FC<Props> = ({ onSearch, theme }) => {
-  theme = useSelector((state: RootState) => state.theme.theme);
+const SearchBar: React.FC<Props> = ({ onSearch }) => {
+  const theme = useSelector((state: RootState) => state.theme.theme);
 
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
