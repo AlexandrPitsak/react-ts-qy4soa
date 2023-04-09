@@ -1,10 +1,5 @@
-import {
-  AuthState,
-  AuthActionTypes,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT,
-} from '../../types/';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../../types";
+
 
 const initialState: AuthState = {
   isAuthenticated: false,
