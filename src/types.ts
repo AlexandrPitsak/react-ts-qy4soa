@@ -93,6 +93,6 @@ export interface RootState {
     token: string | null;
   };
   theme: {
-    theme: 'light' | 'dark';
+    theme: Theme;
   };
 }

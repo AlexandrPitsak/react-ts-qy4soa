@@ -9,7 +9,7 @@ const initialState: ThemeState = {
   theme: lightTheme,
 };
 
-const themeReducer = (state = initialState, action): ThemeState => {
+const themeReducer = (state = initialState, action: { type: any; }): ThemeState => {
   switch (action.type) {
     case TOGGLE_THEME:
       return {

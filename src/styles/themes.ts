@@ -7,7 +7,7 @@ export const lightTheme = {
   cardBackground: '#ffffff',
   cardText: '#1a1a1a',
   buttonText: '#ffffff',
-  buttonBackground: '#4caf50',
+  buttonBackground: '#ff0000',
 };
 
 export const darkTheme: Theme = {

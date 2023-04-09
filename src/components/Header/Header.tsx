@@ -5,7 +5,7 @@ import { logout } from '../../store/actions/authActions';
 import { toggleTheme } from '../../store/actions/themeActions';
 import styled from 'styled-components';
 import { lightTheme } from '../../styles/themes';
-// import SearchBar from '../SearchBar/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -64,7 +64,7 @@ const Header = () => {
   return (
     <HeaderContainer theme={theme}>
       <Logo>BirdWatcher</Logo>
-      {/* <SearchBar /> */}
+      <SearchBar theme={theme}/>
       <Nav theme={theme}>
         <ul>
           <li>
