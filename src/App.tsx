@@ -1,31 +1,33 @@
-import * as React from 'react';
-import Header from './components/Header';
-import './style.css';
-import BirdCard from './components/BirdCard/BirdCard';
-import { useSelector } from 'react-redux';
-import { RootState, Theme } from './types';
-import styled from 'styled-components';
-
-export default function App() {
-  const theme = useSelector((state: RootState) => state.theme.theme);
-
+import * as React from "react";
+import Header from "./components/Header";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import GlobalStyle from "./globalStyles";
+import { Theme } from "./styles/themes";
 
 const Main = styled.div`
+  // flex: 1;
+  padding-top: 70px;
+  margin: auto;
   font-size: 1.5rem;
-  padding: 100px 30%;
+  padding: 20%x;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.headerBackground};
   color: ${(props: { theme: Theme }) => props.theme.text};
-  height: 200vh;
-  `;
+  height: 100vh;
+`;
 
-  return(
+export default function App() {
+  const theme = useSelector((state: any) => state.theme.theme);
+
+  return (
     <>
-    <Header/>
-    <Main theme={theme}>
-      <BirdCard />
-    </Main>
-    </>
+      <GlobalStyle />
+      <Header />
 
-  )
+      <Main theme={theme}></Main>
+
+      {/* <Footer /> */}
+    </>
+  );
 }

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { lightTheme } from '../../styles/themes';
-import { RootState, Theme } from '../../types';
 import styled from 'styled-components';
 
 const SearchInput = styled.input`
@@ -10,14 +8,7 @@ const SearchInput = styled.input`
   border-radius: 0.5rem;
   margin-right: 1rem;
   border: ${(props) =>
-    props.theme === lightTheme ? '2px solid #D0D5D0' : 'none'};
-`;
-
-const SearchButton = styled.button`
-  background-color: ${(props: { theme: Theme }) => props.theme.buttonBackground};
-  color: ${(props: { theme: Theme }) => props.theme.buttonText};
-  font-weight: bold;
-  cursor: pointer;
+    props.theme === 'lightTheme' ? '2px solid #D0D5D0' : 'none'};
 `;
 
 const SearchContainer = styled.div`
@@ -30,7 +21,7 @@ interface Props {
 }
 
 const SearchBar: React.FC<Props> = ({ onSearch }) => {
-  const theme = useSelector((state: RootState) => state.theme.theme);
+  const theme = useSelector((state:any) => state.theme.theme);
 
   const [query, setQuery] = useState('');
 
@@ -49,9 +40,9 @@ const SearchBar: React.FC<Props> = ({ onSearch }) => {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
-        <SearchButton theme={theme} type="submit">
+        {/* <SearchButton theme={theme} type="submit">
           Search
-        </SearchButton>
+        </SearchButton> */}
       </SearchContainer>
     </form>
   );

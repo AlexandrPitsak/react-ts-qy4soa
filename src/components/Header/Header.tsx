@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store/rootReducer";
-// import { logout } from '../../store/actions/authActions';
-import {
-  ThemeActionTypes,
-  toggleTheme,
-} from "../../store/actions/themeActions";
-import { lightTheme } from "../../styles/themes";
 import SearchBar from "../SearchBar";
 import styled from "styled-components";
-import { Theme } from "../../types";
+import ButtonComponent from "./ButtonComponent";
+import { Theme } from "../../styles/themes";
+import {setDarkTheme, setLightTheme} from '../../store/themeSlice'
 
 const HeaderContainer = styled.header<{ hasShadow: boolean }>`
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   z-index: 9999;
   display: flex;
@@ -48,46 +46,28 @@ const Nav = styled.nav`
 
   button {
     font-size: 1rem;
-
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: bold;
-    color: ${(props: { theme: { buttonText: any } }) => props.theme.buttonText};
+    color: ${(props: { theme: { buttonText: string } }) => props.theme.buttonText};
     background-color: ${(props: { theme: { buttonBackground: any } }) =>
       props.theme.buttonBackground};
     border: none;
-    cursor: pointer;
-
-    &:hover {
-      opacity: 0.8;
-    }
   }
 `;
 
 const Header = () => {
   const dispatch = useDispatch();
+  const theme = useSelector((state:any) => state.theme.theme);
 
-  // const isAuthenticated = useSelector(
-  //   (state: RootState) => state.auth.isAuthenticated
-  // );
-  const theme = useSelector((state: RootState) => state.theme.theme);
-  // const toggleHandler = () => dispatch(toggleTheme());
-
-    // const handleLogout = () => {
-    //   dispatch(logout());
-    // };
-
-  const toggleHandler = () => {
-    dispatch(toggleTheme() as unknown as ThemeActionTypes);
+  const themeSwitch = () => {
+    if (theme.state) {
+      dispatch(setDarkTheme());
+    } else {
+      dispatch(setLightTheme());
+    }
   };
-  /*
-  This code sets up an event listener on the window object to listen for scroll events.
-  When the user scrolls down the page, it checks the current vertical scroll position
-   using window.pageYOffset.
-  If the position is greater than 0, it sets the hasShadow state variable to true,
-  indicating that the Header should display a shadow. If the position is 0,
-  it sets the hasShadow state variable to false.
-   */
+
   const [hasShadow, setHasShadow] = useState(false);
 
   const handleScroll = () => {
@@ -97,12 +77,7 @@ const Header = () => {
       setHasShadow(false);
     }
   };
-  /*
-  The useEffect hook is used to add and remove the event listener.
-  It is only called once when the component is mounted, thanks to the empty
-  dependency array [] passed as the second argument. When the component is unmounted,
-  the returned cleanup function removes the event listener to avoid memory leaks.
-  */
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -124,9 +99,10 @@ const Header = () => {
             />
           </li>
           <li>
-            <button onClick={toggleHandler}>
-              {theme === lightTheme ? "Dark" : "Light"} Theme
-            </button>
+            <ButtonComponent
+              name={theme.state ? "Dark" : "Light"}
+              onClick={themeSwitch}
+            />
           </li>
           {/* {isAuthenticated ? (
             <li>
@@ -138,7 +114,13 @@ const Header = () => {
             </li>
           )} */}
           <li>
-            <button>Login</button>
+            <div>
+              <ButtonComponent
+              onClick={() => console.log('AAAAA')}
+              name="Login"
+              />
+
+            </div>
           </li>
         </ul>
       </Nav>
