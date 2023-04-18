@@ -5,6 +5,7 @@ import styled from "styled-components";
 import ButtonComponent from "./ButtonComponent";
 import { Theme } from "../../styles/themes";
 import {setDarkTheme, setLightTheme} from '../../store/themeSlice'
+import { closeModal, openModal } from "../../store/modalSlice";
 
 const HeaderContainer = styled.header<{ hasShadow: boolean }>`
   position: fixed;
@@ -59,6 +60,10 @@ const Nav = styled.nav`
 const Header = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state:any) => state.theme.theme);
+
+  const modalOpen = () => {
+      dispatch(openModal());
+  }
 
   const themeSwitch = () => {
     if (theme.state) {
@@ -116,7 +121,7 @@ const Header = () => {
           <li>
             <div>
               <ButtonComponent
-              onClick={() => console.log('AAAAA')}
+                onClick={ modalOpen }
               name="Login"
               />
 
