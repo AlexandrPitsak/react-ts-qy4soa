@@ -11,8 +11,7 @@ const BackdropStyle = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #468b44e1;
-  /* backdrop-filter: blur(10px); */
+  background: #f2f2f2e0;
 `;
 
 const Backdrop = ({

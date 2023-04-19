@@ -18,6 +18,8 @@ const StyledModal = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 10;
+
 `;
 const dropIn = {
   hidden: {
@@ -28,10 +30,9 @@ const dropIn = {
     y: "0",
     opacity: 1,
     transition: {
-      duration: 0.1,
       type: "spring",
-      damping: 0.3,
-      stiffness: 24,
+      damping: 10,
+      stiffness: 100,
     },
   },
   exit: {
