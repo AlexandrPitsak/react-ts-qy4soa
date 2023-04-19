@@ -25,15 +25,16 @@ export default function App() {
 
   return (
     <>
-      <AnimatePresence initial={false} onExitComplete={() => console.log("EXIT COMPLETE")}>
-      <GlobalStyle />
+      <AnimatePresence
+        initial={false}
+        onExitComplete={() => console.log("EXIT COMPLETE")}>
+        <GlobalStyle />
 
-        {modal && <Modal modal={modal} />}
+        {modal && <Modal />}
 
-      <Header />
+        <Header />
 
-
-      <Main theme={theme}></Main>
+        <Main theme={theme}></Main>
       </AnimatePresence>
 
       {/* <Footer /> */}

@@ -4,8 +4,8 @@ import SearchBar from "../SearchBar";
 import styled from "styled-components";
 import ButtonComponent from "./ButtonComponent";
 import { Theme } from "../../styles/themes";
-import {setDarkTheme, setLightTheme} from '../../store/themeSlice'
-import { closeModal, openModal } from "../../store/modalSlice";
+import { setDarkTheme, setLightTheme } from "../../store/themeSlice";
+import { openModal } from "../../store/modalSlice";
 
 const HeaderContainer = styled.header<{ hasShadow: boolean }>`
   position: fixed;
@@ -49,7 +49,8 @@ const Nav = styled.nav`
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: bold;
-    color: ${(props: { theme: { buttonText: string } }) => props.theme.buttonText};
+    color: ${(props: { theme: { buttonText: string } }) =>
+      props.theme.buttonText};
     background-color: ${(props: { theme: { buttonBackground: any } }) =>
       props.theme.buttonBackground};
     border: none;
@@ -58,11 +59,11 @@ const Nav = styled.nav`
 
 const Header = () => {
   const dispatch = useDispatch();
-  const theme = useSelector((state:any) => state.theme.theme);
+  const theme = useSelector((state: any) => state.theme.theme);
 
   const modalOpen = () => {
-      dispatch(openModal());
-  }
+    dispatch(openModal());
+  };
 
   const themeSwitch = () => {
     if (theme.state) {
@@ -119,11 +120,7 @@ const Header = () => {
           )} */}
           <li>
             <div>
-              <ButtonComponent
-                onClick={ modalOpen }
-              name="Login"
-              />
-
+              <ButtonComponent onClick={modalOpen} name="Login" />
             </div>
           </li>
         </ul>
