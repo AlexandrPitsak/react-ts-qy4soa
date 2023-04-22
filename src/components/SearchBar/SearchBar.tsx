@@ -7,6 +7,7 @@ const SearchInput = styled.input`
   border: none;
   border-radius: 0.5rem;
   margin-right: 1rem;
+  outline: none;
   border: ${(props) =>
     props.theme === 'lightTheme' ? '2px solid #D0D5D0' : 'none'};
 `;

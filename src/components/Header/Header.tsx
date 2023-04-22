@@ -44,7 +44,7 @@ const Nav = styled.nav`
     margin-right: 1rem;
   }
 
-  button {
+  /* button {
     font-size: 1rem;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
@@ -54,7 +54,7 @@ const Nav = styled.nav`
     background-color: ${(props: { theme: { buttonBackground: any } }) =>
       props.theme.buttonBackground};
     border: none;
-  }
+  } */
 `;
 
 const Header = () => {

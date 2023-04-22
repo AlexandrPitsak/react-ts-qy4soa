@@ -12,7 +12,7 @@ const Main = styled.div`
   padding-top: 70px;
   margin: auto;
   font-size: 1.5rem;
-  padding: 20%x;
+  padding: 20%;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.headerBackground};
   color: ${(props: { theme: Theme }) => props.theme.text};
@@ -22,17 +22,18 @@ const Main = styled.div`
 export default function App() {
   const theme = useSelector((state: any) => state.theme.theme);
   const modal = useSelector((state: any) => state.modal.modal);
-
+  const text= 'This is modal Please login PLease fill form and more'
   return (
     <>
+      <GlobalStyle />
+
       <AnimatePresence
         initial={false}
         onExitComplete={() => console.log("EXIT COMPLETE")}>
-        <GlobalStyle />
 
-        {modal && <Modal />}
+        {modal && <Modal text={text} />}
 
-        <Header />
+        <Header/>
 
         <Main theme={theme}></Main>
       </AnimatePresence>
