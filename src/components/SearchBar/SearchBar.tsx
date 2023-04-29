@@ -4,12 +4,11 @@ import styled from 'styled-components';
 
 const SearchInput = styled.input`
   padding: 0.5rem;
-  border: none;
   border-radius: 0.5rem;
   margin-right: 1rem;
   outline: none;
   border: ${(props) =>
-    props.theme === 'lightTheme' ? '2px solid #D0D5D0' : 'none'};
+    props.theme ? '1px solid #b3b7b3' : 'none'};
 `;
 
 const SearchContainer = styled.div`
@@ -41,9 +40,6 @@ const SearchBar: React.FC<Props> = ({ onSearch }) => {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
-        {/* <SearchButton theme={theme} type="submit">
-          Search
-        </SearchButton> */}
       </SearchContainer>
     </form>
   );

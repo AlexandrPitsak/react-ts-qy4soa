@@ -7,7 +7,7 @@ import { Theme } from "../../styles/themes";
 import { setDarkTheme, setLightTheme } from "../../store/themeSlice";
 import { openModal } from "../../store/modalSlice";
 
-const HeaderContainer = styled.header<{ hasShadow: boolean }>`
+const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
   left: 0;
@@ -21,11 +21,6 @@ const HeaderContainer = styled.header<{ hasShadow: boolean }>`
     props.theme.headerBackground};
   color: ${(props: { theme: Theme }) => props.theme.text};
   transition: box-shadow 0.2s ease-in-out;
-  ${({ hasShadow }) =>
-    hasShadow &&
-    `
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    `}
 `;
 
 const Logo = styled.div`
@@ -73,25 +68,25 @@ const Header = () => {
     }
   };
 
-  const [hasShadow, setHasShadow] = useState(false);
+  // const [hasShadow, setHasShadow] = useState(false);
 
-  const handleScroll = () => {
-    if (window.pageYOffset > 0) {
-      setHasShadow(true);
-    } else {
-      setHasShadow(false);
-    }
-  };
+  // const handleScroll = () => {
+  //   if (window.pageYOffset > 0) {
+  //     setHasShadow(true);
+  //   } else {
+  //     setHasShadow(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
   return (
-    <HeaderContainer theme={theme} hasShadow={hasShadow}>
+    <HeaderContainer theme={theme}>
       <Logo>BirdWatcher</Logo>
 
       <Nav theme={theme}>
@@ -107,6 +102,11 @@ const Header = () => {
             <ButtonComponent
               name={theme.state ? "Dark" : "Light"}
               onClick={themeSwitch}
+            />
+          </li>
+          <li>
+            <ButtonComponent
+              name="Birds"
             />
           </li>
           {/* {isAuthenticated ? (

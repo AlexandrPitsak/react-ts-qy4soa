@@ -22,20 +22,21 @@ const Main = styled.div`
 export default function App() {
   const theme = useSelector((state: any) => state.theme.theme);
   const modal = useSelector((state: any) => state.modal.modal);
-  const text= 'This is modal Please login PLease fill form and more'
+  const text= 'Login'
   return (
     <>
       <GlobalStyle />
+      <Header/>
+      <Main theme={theme}></Main>
 
       <AnimatePresence
-        initial={false}
+        // mode="popLayout"
+        // initial={false}
         onExitComplete={() => console.log("EXIT COMPLETE")}>
 
         {modal && <Modal text={text} />}
 
-        <Header/>
 
-        <Main theme={theme}></Main>
       </AnimatePresence>
 
       {/* <Footer /> */}

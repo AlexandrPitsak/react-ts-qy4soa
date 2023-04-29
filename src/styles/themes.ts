@@ -10,7 +10,7 @@ export interface Theme {
   };
 
 export const lightTheme: Theme = {
-  bodyBackground: '#f2f2f2e9',
+  bodyBackground: '#f2f2f2',
   headerBackground: '#ffffff',
   text: '#1a1a1a',
   cardBackground: '#ffffff',

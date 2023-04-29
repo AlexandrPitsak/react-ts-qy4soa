@@ -13,7 +13,6 @@ const BackdropStyle = styled(motion.div)`
   display: flex;
   align-items: center; 
   justify-content: center;
-  opacity: 0.5;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.bodyBackground};
     `;
@@ -33,8 +32,9 @@ const Backdrop = ({
       key="backdrop"
       onClick={onClick}
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}>
+      animate={{ opacity: 0.9 }}
+      exit={{ opacity: 0 }}
+      >
       {children}
     </BackdropStyle>
   );
