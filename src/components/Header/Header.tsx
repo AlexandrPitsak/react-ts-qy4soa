@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import SearchBar from "../SearchBar";
 import styled from "styled-components";
-import ButtonComponent from "./ButtonComponent";
+import ButtonComponent from "../../ButtonComponent";
 import { Theme } from "../../styles/themes";
 import { setDarkTheme, setLightTheme } from "../../store/themeSlice";
 import { openModal } from "../../store/modalSlice";
+import ShowLogo from "../ShowLogo";
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -16,16 +16,23 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.headerBackground};
   color: ${(props: { theme: Theme }) => props.theme.text};
   transition: box-shadow 0.2s ease-in-out;
 `;
 
-const Logo = styled.div`
-  font-size: 2rem;
-  font-weight: bold;
+const Logo = styled(ShowLogo)`
+  fill: ${(props: { theme: Theme }) => props.theme.text};
+
+  /* position: absolute; */
+  /* position: relative; */
+  left: 100px;
+  /* width: 100%; */
+  align-items: left;
+
 `;
 
 const Nav = styled.nav`
@@ -38,24 +45,18 @@ const Nav = styled.nav`
   li:not(:last-child) {
     margin-right: 1rem;
   }
-
-  /* button {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: bold;
-    color: ${(props: { theme: { buttonText: string } }) =>
-      props.theme.buttonText};
-    background-color: ${(props: { theme: { buttonBackground: any } }) =>
-      props.theme.buttonBackground};
-    border: none;
-  } */
 `;
 
 const Header = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state: any) => state.theme.theme);
+  const modal = useSelector((state: any) => state.modal.modal);
 
+  useEffect(() => {
+    modal && document.body.style.overflow === 'hidden';
+    !modal && document.body.style.overflow === 'unset';
+ }, [modal ]);
+ 
   const modalOpen = () => {
     dispatch(openModal());
   };
@@ -87,40 +88,23 @@ const Header = () => {
 
   return (
     <HeaderContainer theme={theme}>
-      <Logo>BirdWatcher</Logo>
-
-      <Nav theme={theme}>
+      <Logo theme={theme}/>
+      <Nav theme={theme} >
         <ul>
           <li>
-            <SearchBar
-              onSearch={function (query: string): void {
-                throw new Error("Function not implemented.");
-              }}
-            />
-          </li>
-          <li>
             <ButtonComponent
-              name={theme.state ? "Dark" : "Light"}
+              children={theme.state ? "Dark" : "Light"}
               onClick={themeSwitch}
             />
           </li>
           <li>
             <ButtonComponent
-              name="Birds"
+              children="Birds"
             />
           </li>
-          {/* {isAuthenticated ? (
-            <li>
-              <button onClick={handleLogout}>Logout</button>
-            </li>
-          ) : (
-            <li>
-              <button>Login</button>
-            </li>
-          )} */}
           <li>
             <div>
-              <ButtonComponent onClick={modalOpen} name="Login" />
+              <ButtonComponent onClick={modalOpen} children="Login" />
             </div>
           </li>
         </ul>

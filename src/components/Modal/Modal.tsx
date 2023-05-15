@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Backdrop from "../Backdrop/Backdrop";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import ButtonComponent from "../Header/ButtonComponent";
+import ButtonComponent from "../../ButtonComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/modalSlice";
 import { createPortal } from "react-dom";
+import ShowCloseIcon from "../ShowCloseIcon";
+import { Theme } from "../../styles/themes";
+
 
 const StyledModal = styled(motion.div)`
   align-items: center;
   width: 400px;
   height: 400px;
   border-radius: 12px;
-  z-index: 10;
-  /* background: rgb(221,216,93);
-  background: linear-gradient(0deg, rgba(221,216,93,1) 0%, rgba(45,138,253,1) 100%); */
-  background-color: #a3a3a3;
+  /* background-color: #a0a0a0; */
+  background: linear-gradient(135deg, rgb(19, 49, 246), rgba(255, 255, 255));
+  /* backdrop-filter: blur(10px); */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+  /* border: 5px solid rgba(255, 255, 255, 0.18); */
 `;
 
 const Input = styled.input`
@@ -26,6 +30,7 @@ const Input = styled.input`
   border-radius: 12px;
   border: none;
   outline: none;  
+  /* opacity: 1; */
 
 `
 const Form = styled.form`
@@ -33,20 +38,40 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
-const Button = styled.div`
-  padding: 50px;
-  border: none;
+
 `
 const Text = styled.p`
+
   align-items: center;
-  padding: 40px;
+  padding: 30 0 90 0;
   text-align: center;
-  font-size: 40px;
+  font-size: 25px;
+  font-family: Gill Sans;
+  color: ${(props: { theme: Theme }) =>
+    props.theme.text};
 `
+
 const CloseButton = styled.div`
-  width: 100%;
+  position: absolute;
+  left
+  
+  
+  
+  
+  
+  : 0;
   text-align: right;
+  padding: 10px;
+  cursor: pointer;
+  fill: ${(props: { theme: Theme }) =>
+    props.theme.text};
+`
+const Svg = styled(ShowCloseIcon)`
+  width: 20px;
+  height: 20px;
+  &:hover{
+    fill: red;
+  }
 `
 
 const dropIn = {
@@ -56,12 +81,12 @@ const dropIn = {
   },
   visible: {
     y: "0",
-    opacity: 0.9,
+    opacity: 1,
     transition: {
       type: "spring",
       // duration: 1
-      damping: 10,
-      stiffness: 80,
+      damping: 40,
+      stiffness: 380,
     },
   },
   exit: {
@@ -69,7 +94,7 @@ const dropIn = {
     opacity: 0,
     transition: {
       type: "spring",
-      damping: 10,
+      damping: 20,
       stiffness: 80
     },
   },
@@ -78,11 +103,13 @@ const dropIn = {
 const Modal = ({ text }: any) => {
   const dispatch = useDispatch();
   const theme = useSelector((state: any) => state.theme.theme);
+  const modal = useSelector((state: any) => state.modal.modal);
 
   const modalClose = () => {
     dispatch(closeModal());
   };
-  // if (!modal) return null;
+
+  modal?document.body.style.overflow = 'hidden':document.body.style.overflow = 'unset'
 
   return createPortal(
     <>
@@ -90,27 +117,29 @@ const Modal = ({ text }: any) => {
         <StyledModal
           theme={theme}
           key="modal"
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation()
+            // e.preventDefault()
+          }}
           variants={dropIn}
           initial="hidden"
           animate="visible"
           exit="exit">
-          <CloseButton>
-            <ButtonComponent type="submit" name="x" onClick={modalClose}/>
+          <CloseButton theme={theme}>
+            <Svg onClick={modalClose}/>
           </CloseButton>
 
-          <Text>{text}</Text>
+          <Text theme={theme}>{text}</Text>
 
-          <Form >
+          <Form>
               <Input type="text" autoComplete="false" placeholder="Email" />
               <Input type="password" autoComplete="off" placeholder="Password" />
-              <Button>
-                <ButtonComponent type="submit" name="Log in" />
-              </Button>
+              <ButtonComponent width="70%" type="submit" children="Log in"/>
           </Form>
         </StyledModal>
       </Backdrop>
     </>,
+
     document.getElementById("modal") as Element
   );
 };

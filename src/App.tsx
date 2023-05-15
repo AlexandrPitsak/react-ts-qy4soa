@@ -6,35 +6,45 @@ import GlobalStyle from "./globalStyles";
 import { Theme } from "./styles/themes";
 import Modal from "./components/Modal";
 import { AnimatePresence } from "framer-motion";
+import Card from "./components/Card";
+import BirdsList from "./components/BirdsList/BirdsList";
+import { useEffect } from "react";
 
 const Main = styled.div`
-  // flex: 1;
-  padding-top: 70px;
-  margin: auto;
-  font-size: 1.5rem;
-  padding: 20%;
-  background-color: ${(props: { theme: Theme }) =>
-    props.theme.headerBackground};
+  padding: 70px 0 0 0;
+  display: grid;
+  
+  grid-template-columns: repeat(1, 1fr);
+  text-align: center;
+  align-items: center;
+
   color: ${(props: { theme: Theme }) => props.theme.text};
-  height: 100vh;
+  background-color: ${(props: { theme: Theme }) =>
+  props.theme.headerBackground};
+
+  @media (min-width: 760px) {
+    flex-direction: grid;
+  }
 `;
 
 export default function App() {
   const theme = useSelector((state: any) => state.theme.theme);
   const modal = useSelector((state: any) => state.modal.modal);
-  const text= 'Login'
+  
   return (
     <>
       <GlobalStyle />
       <Header/>
-      <Main theme={theme}></Main>
+      <Main theme={theme}>
+        <BirdsList />
+      </Main>
 
       <AnimatePresence
         // mode="popLayout"
         // initial={false}
         onExitComplete={() => console.log("EXIT COMPLETE")}>
 
-        {modal && <Modal text={text} />}
+        {modal && <Modal text='Login' />}
 
 
       </AnimatePresence>
