@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ButtonComponent from "../../ButtonComponent";
-import { Theme } from "../../styles/themes";
+import { Theme } from "../../theme/themes";
 import { setDarkTheme, setLightTheme } from "../../store/themeSlice";
 import { openModal } from "../../store/modalSlice";
 import ShowLogo from "../ShowLogo";
@@ -19,14 +19,17 @@ const HeaderContainer = styled.header`
   padding-right: 1rem;
   padding-left: 1rem;
   background-color: ${(props: { theme: Theme }) =>
-    props.theme.headerBackground};
-  color: ${(props: { theme: Theme }) => props.theme.text};
+    props.theme.background};
+    background-color: black;
+  color: ${(props: { theme: Theme }) => props.theme.textBackground};
   transition: box-shadow 0.2s ease-in-out;
+  border: solid 2px grey;
+  z-index: 999;
 `;
 
 const Logo = styled(ShowLogo)`
-  fill: ${(props: { theme: Theme }) => props.theme.text};
-
+  fill: ${(props: { theme: Theme }) => props.theme.textBackground};
+  fill: red;
   /* position: absolute; */
   /* position: relative; */
   left: 100px;
@@ -48,26 +51,26 @@ const Nav = styled.nav`
 `;
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const theme = useSelector((state: any) => state.theme.theme);
-  const modal = useSelector((state: any) => state.modal.modal);
+  // const dispatch = useDispatch();
+  // const theme = useSelector((state: any) => state.theme.theme);
+  // const modal = useSelector((state: any) => state.modal.modal);
 
-  useEffect(() => {
-    modal && document.body.style.overflow === 'hidden';
-    !modal && document.body.style.overflow === 'unset';
- }, [modal ]);
+//   useEffect(() => {
+//     modal && document.body.style.overflow === 'hidden';
+//     !modal && document.body.style.overflow === 'unset';
+//  }, [modal ]);
  
-  const modalOpen = () => {
-    dispatch(openModal());
-  };
+  // const modalOpen = () => {
+  //   dispatch(openModal());
+  // };
 
-  const themeSwitch = () => {
-    if (theme.state) {
-      dispatch(setDarkTheme());
-    } else {
-      dispatch(setLightTheme());
-    }
-  };
+  // const themeSwitch = () => {
+  //   if (theme.state) {
+  //     dispatch(setDarkTheme());
+  //   } else {
+  //     dispatch(setLightTheme());
+  //   }
+  // };
 
   // const [hasShadow, setHasShadow] = useState(false);
 
@@ -87,15 +90,25 @@ const Header = () => {
   // }, []);
 
   return (
-    <HeaderContainer theme={theme}>
-      <Logo theme={theme}/>
-      <Nav theme={theme} >
+    // <HeaderContainer theme={theme}>
+          <HeaderContainer>
+
+      {/* <Logo theme={theme}/> */}
+      <Logo/>
+
+      {/* <Nav theme={theme} > */}
+      <Nav>
+
         <ul>
           <li>
-            <ButtonComponent
+            {/* <ButtonComponent
               children={theme.state ? "Dark" : "Light"}
               onClick={themeSwitch}
-            />
+            /> */}
+            {/* <ButtonComponent
+              children={theme.state ? "Dark" : "Light"}
+              onClick={themeSwitch}
+            /> */}
           </li>
           <li>
             <ButtonComponent
@@ -104,7 +117,9 @@ const Header = () => {
           </li>
           <li>
             <div>
-              <ButtonComponent onClick={modalOpen} children="Login" />
+              {/* <ButtonComponent onClick={modalOpen} children="Login" /> */}
+              <ButtonComponent children="Login" />
+
             </div>
           </li>
         </ul>

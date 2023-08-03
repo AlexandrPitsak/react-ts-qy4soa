@@ -1,75 +1,75 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Theme } from '../../styles/themes'
+// import { Theme } from '../../theme/themes'
 import img from '../../assets/123.jpg'
 import ButtonComponent from '../../ButtonComponent'
 
-const Container = styled.div`
-    max-width: 120rem;
-    /* padding-inline: 1.5rem; */
-    margin-inline: auto;
-    border: 1px solid grey;
-    border-radius: 20px;
+// const Container = styled.div`
+//     max-width: 120rem;
+//     /* padding-inline: 1.5rem; */
+//     margin-inline: auto;
+//     border: 1px solid grey;
+//     border-radius: 20px;
 
-    @media screen  and (max-width: 56.25em){
+//     @media screen  and (max-width: 56.25em){
         
-    }
-`
-const CardItem = styled.article`
-    display: flex;
-    background-color: ${(props: { theme: Theme }) =>
-        props.theme.headerBackground};
-    color: ${(props: { theme: Theme }) => props.theme.text};
-    box-shadow: 0.5 rem 0.5 rem 1 rem rgba(0, 0, 0, 0.05);
-    transition: background-color 0.25s;
+//     }
+// `
+// const CardItem = styled.article`
+//     display: flex;
+//     background-color: ${(props: { theme: Theme }) =>
+//         props.theme.headerBackground};
+//     color: ${(props: { theme: Theme }) => props.theme.text};
+//     box-shadow: 0.5 rem 0.5 rem 1 rem rgba(0, 0, 0, 0.05);
+//     transition: background-color 0.25s;
 
-    @media screen  and (max-width: 56.25em){
-        flex-direction: column;
-    }
+//     @media screen  and (max-width: 56.25em){
+//         flex-direction: column;
+//     }
 
-`
-const CardImage = styled.div`
-    flex: 1;
-`
-const Image = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    mix-blend-mode: normal;
-    border-radius: 20px 0px 0px 20px;
+// `
+// const CardImage = styled.div`
+//     flex: 1;
+// `
+// const Image = styled.img`
+//     width: 100%;
+//     height: 100%;
+//     object-fit: cover;
+//     mix-blend-mode: normal;
+//     border-radius: 20px 0px 0px 20px;
 
-`
-const CardBody = styled.div`
-    flex: 1;
-    padding: 5rem;
+// `
+// const CardBody = styled.div`
+//     flex: 1;
+//     padding: 5rem;
 
-    @media screen  and (max-width: 56.25em){
-        padding: 2.5rem;
-    }
-`
-const CardTitle = styled.h2`
-    font-family: 'Playfair Display', sans-serif;
-    font-size: clamp(3rem, 5vw, 5rem);
-`
-const CardSubtitle = styled.h3`
-    font-size: 1.4rem;
-    font-weight: normal;
-    text-transform: uppercase;
-    margin-bottom: 2.5rem;
-`
-const Descriptions = styled.p`
-  &:not(:last-child) {
-    margin-bottom: 1.5rem;
-}
-`
-const CardButton = styled(ButtonComponent)`
-    display: inline-block;
-    text-decoration: none;
-    color: ${(props: { theme: Theme }) => props.theme.text};
-    padding: 1rem 2.5rem;
-    margin-top: 2.5rem;
-    border: 2px solid ${(props: { theme: Theme }) => props.theme.buttonBackground};
-`
+//     @media screen  and (max-width: 56.25em){
+//         padding: 2.5rem;
+//     }
+// `
+// const CardTitle = styled.h2`
+//     font-family: 'Playfair Display', sans-serif;
+//     font-size: clamp(3rem, 5vw, 5rem);
+// `
+// const CardSubtitle = styled.h3`
+//     font-size: 1.4rem;
+//     font-weight: normal;
+//     text-transform: uppercase;
+//     margin-bottom: 2.5rem;
+// `
+// const Descriptions = styled.p`
+//   &:not(:last-child) {
+//     margin-bottom: 1.5rem;
+// }
+// `
+// const CardButton = styled(ButtonComponent)`
+//     display: inline-block;
+//     text-decoration: none;
+//     color: ${(props: { theme: Theme }) => props.theme.text};
+//     padding: 1rem 2.5rem;
+//     margin-top: 2.5rem;
+//     border: 2px solid ${(props: { theme: Theme }) => props.theme.buttonBackground};
+// `
 
 // const Span = styled.span`
 //     display: inline-block;
@@ -80,31 +80,60 @@ const CardButton = styled(ButtonComponent)`
 //     }
 // `
 
-const Card = (props: any) => {
+const Popular = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-column-gap: 1rem;
+    grid-row-gap: 2rem;
+`
+const Img = styled.img`
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+    border-radius: 1rem;
+`
+const H2= styled.h2`
+    font-size: 0.8rem;
+`
 
-  return (
-    <>
-        <Container>
-            <CardItem> 
-                <CardImage> 
-                    <Image src={props.img} alt="bird" />
-                </CardImage>
-                <CardBody> 
-                    <CardTitle>{props.title}</CardTitle>
-                    <CardSubtitle>Subtitle</CardSubtitle>
-                    <Descriptions>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta obcaecati dolore doloremque hic optio deleniti, rerum expedita quibusdam minus sint! Reiciendis, vitae? Quia, possimus consequuntur officiis dignissimos eveniet dicta illum?
-                    </Descriptions>
-                    <CardButton children="Read More"/>
-                    {/* </CardButton> */}
-                </CardBody>
-            </CardItem>
-        </Container>
+export interface Movie {
+    id: string;
+    movie: string;
+    title: string;
+    backdrop_path: string
+  }
+
+const Card = ({movie}:{movie: Movie}) => {
+
+return (
+    <Popular>
+        <H2 >{movie.title}</H2>
+        <Img src={'https://image.tmdb.org/t/p/w500'+movie.backdrop_path} alt="" />
+    </Popular>
+)
+//   return (
+//     <>
+//         <Container>
+//             <CardItem> 
+//                 <CardImage> 
+//                     <Image src={props.img} alt="bird" />
+//                 </CardImage>
+//                 <CardBody> 
+//                     <CardTitle>{props.title}</CardTitle>
+//                     <CardSubtitle>Subtitle</CardSubtitle>
+//                     <Descriptions>
+//                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta obcaecati dolore doloremque hic optio deleniti, rerum expedita quibusdam minus sint! Reiciendis, vitae? Quia, possimus consequuntur officiis dignissimos eveniet dicta illum?
+//                     </Descriptions>
+//                     <CardButton children="Read More"/>
+//                 </CardBody>
+//             </CardItem>
+//         </Container>
         
-    </>
+//     </>
    
 
-  )
+//   )
 }
 
 export default Card
+

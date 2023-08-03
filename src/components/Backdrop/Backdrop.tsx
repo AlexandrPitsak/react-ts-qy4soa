@@ -2,9 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { Theme } from "../../styles/themes";
+import { Theme } from "../../theme/themes";
 
-const BackdropStyle = styled(motion.div)`
+const BackdropStyle = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -14,7 +14,7 @@ const BackdropStyle = styled(motion.div)`
   align-items: center; 
   justify-content: center;
   background-color: ${(props: { theme: Theme }) =>
-    props.theme.bodyBackground};
+    props.theme.background};
   
   /* background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
   backdrop-filter: blur(20px);
@@ -30,16 +30,13 @@ const Backdrop = ({
   children: React.ReactNode;
   onClick: any;
 }) => {
-  const theme = useSelector((state: any) => state.theme.theme);
+  // const theme = useSelector((state: any) => state.theme.theme);
 
   return (
     <BackdropStyle
-      theme={theme}
+      // theme={theme}
       key="backdrop"
       onClick={onClick}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 0.9 }}
-      exit={{ opacity: 0 }}
       >
       {children}
     </BackdropStyle>

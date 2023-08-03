@@ -8,7 +8,6 @@ const store = configureStore({
   reducer: {
     theme: themeReducer,
     modal: modalReducer,
-    // theme: themeReducer,
     // loginModal: loginModalReducer,
   },
 });

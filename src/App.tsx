@@ -3,51 +3,52 @@ import Header from "./components/Header";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import GlobalStyle from "./globalStyles";
-import { Theme } from "./styles/themes";
-import Modal from "./components/Modal";
+import { Theme } from "./theme/themes";
+// import Modal from "./components/Modal";
 import { AnimatePresence } from "framer-motion";
 import Card from "./components/Card";
+// import BirdsList from "./components/BirdsList/BirdsList";
+import { useEffect, useState } from "react";
+import { Movie, IMovies } from "./components/Movie";
 import BirdsList from "./components/BirdsList/BirdsList";
-import { useEffect } from "react";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+
 
 const Main = styled.div`
-  padding: 70px 0 0 0;
-  display: grid;
-  
-  grid-template-columns: repeat(1, 1fr);
-  text-align: center;
-  align-items: center;
-
-  color: ${(props: { theme: Theme }) => props.theme.text};
-  background-color: ${(props: { theme: Theme }) =>
-  props.theme.headerBackground};
-
-  @media (min-width: 760px) {
-    flex-direction: grid;
-  }
+  position: relative;
+  width: calc(100%-70px);
+  background: rgba(255,255,255,0.5);
+  box-shadow: 0 15px 35px rgba()
 `;
+
 
 export default function App() {
   const theme = useSelector((state: any) => state.theme.theme);
-  const modal = useSelector((state: any) => state.modal.modal);
-  
+  // const modal = useSelector((state: any) => state.modal.modal);
+
   return (
     <>
       <GlobalStyle />
       <Header/>
-      <Main theme={theme}>
-        <BirdsList />
+      <Hero/>
+      <Main>
+      
+          {/* <source src={video} type='video/mp4'/> */}
+          <div className="App">
+            {/* <BirdsList/> */}
+          </div>
       </Main>
 
-      <AnimatePresence
-        // mode="popLayout"
+      {/* <AnimatePresence */}
+        {/* // mode="popLayout"
         // initial={false}
-        onExitComplete={() => console.log("EXIT COMPLETE")}>
+        // onExitComplete={() => console.log("EXIT COMPLETE")}> */}
 
-        {modal && <Modal text='Login' />}
+        {/* {modal && <Modal text='Login' />} */}
 
 
-      </AnimatePresence>
+      {/* </AnimatePresence> */}
 
       {/* <Footer /> */}
     </>

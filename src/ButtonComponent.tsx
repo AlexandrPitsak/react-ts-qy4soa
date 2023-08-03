@@ -1,10 +1,9 @@
 import React from 'react'
 import { motion } from "framer-motion";
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { Theme } from './styles/themes';
+import { Theme } from './theme/themes';
 
-const StyledButton = styled(motion.button)<ButtonProps>`
+export const StyledButton = styled.button<ButtonProps>`
     position: relative;
     display: inline-flex;
     justify-content: center;
@@ -16,13 +15,21 @@ const StyledButton = styled(motion.button)<ButtonProps>`
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: bold;
-    color: ${(props: { theme: { buttonText: string } }) =>
-      props.theme.buttonText};
-    background-color: ${(props: { theme: { buttonBackground: any } }) =>
+    /* color: ${(props: { theme: { buttonText: string } }) =>
+      props.theme.buttonText}; */
+    color: white;
+    background-color: ${props =>
       props.theme.buttonBackground};
     border: none;
-    height: ${({ height }) => height || 'auto'};
-    width: ${({ width }) => width || 'auto'};
+    background-color: ${({ active }) => (active ? "#01AFEE" : "green")};
+
+    &:hover{
+      scale: 1.1;
+    }
+    &:active{
+      scale: 0.9;
+      color: white
+    }
 `
 
 type ButtonProps = {
@@ -31,24 +38,20 @@ type ButtonProps = {
   theme?: Theme;
   type?: 'button' | 'submit' | 'reset';
   id?: string;
-  height?: string;
-  width?: string;
+  active?: boolean;
 };
-const ButtonComponent = ({type, width, id, children, onClick }: ButtonProps) => {
+const ButtonComponent = ({active, type, children, id, onClick }: ButtonProps) => {
 
-  const theme = useSelector((state: any) => state.theme.theme);
+  // const theme = useSelector((state: any) => state.theme.theme);
 
   return (
     <>
       <StyledButton
-        width={width}
         type={type ? type: "button"}
         id={id}
-        theme={theme}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
         onClick={onClick}
         className="button" 
+        active={active}
       >
         {children}
       </StyledButton>
